@@ -11,7 +11,7 @@ swift package clean
 
 # Build the project with Swift
 
-swift build --target WgpuTools
-swift build --configuration release --target WgpuTools
+swift build --target SwiftWgpuTools
+swift build --configuration release --target SwiftWgpuTools
 
 
