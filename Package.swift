@@ -10,7 +10,6 @@ let vulkanPath = "Sources/Libs/Vulkan/Linux"
 
 var dependencies: [Target.Dependency] = []
 var linkedLibraries: [LinkerSetting] = []
-
 var swiftSettings: [SwiftSetting] = []
 var linkerSettings: [LinkerSetting] = []
 
