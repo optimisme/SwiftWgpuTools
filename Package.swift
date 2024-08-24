@@ -1,15 +1,11 @@
 // swift-tools-version: 5.10
 import PackageDescription
 
-let wgpuPath: String
-let vulkanPath: String?
-
 #if os(macOS)
-wgpuPath = "Sources/Libs/Wgpu/wgpu-macos-aarch64-release"
-vulkanPath = nil // Not used on macOS
+let wgpuPath = "Sources/Libs/Wgpu/wgpu-macos-aarch64-release"
 #elseif os(Linux)
-wgpuPath = "Sources/Libs/Wgpu/wgpu-linux-x86_64-release"
-vulkanPath = "Sources/Libs/Vulkan/Linux"
+let wgpuPath = "Sources/Libs/Wgpu/wgpu-linux-x86_64-release"
+let vulkanPath = "Sources/Libs/Vulkan/Linux"
 #endif
 
 var dependencies: [Target.Dependency] = ["Wgpu"]
