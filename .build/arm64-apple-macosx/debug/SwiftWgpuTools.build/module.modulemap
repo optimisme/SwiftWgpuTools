@@ -1,0 +1,4 @@
+module SwiftWgpuTools {
+    umbrella "/Users/albertpalaciosjimenez/Documents/GitHub/SwiftWgpuTools/Sources/Libs/Wgpu/wgpu-macos-aarch64-release/include"
+    export *
+}

@@ -1,0 +1,27 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "WgpuTools-debug.module": ["<WgpuTools-debug.module>"]
+  "main": ["<WgpuTools-debug.module>"]
+  "test": ["<WgpuTools-debug.module>"]
+default: "main"
+nodes:
+  "/Users/albertpalaciosjimenez/Documents/GitHub/SwiftWgpuTools/Sources/Libs/Wgpu/wgpu-macos-aarch64-release/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "<WgpuTools-debug.module>":
+    tool: phony
+    inputs: []
+    outputs: ["<WgpuTools-debug.module>"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/albertpalaciosjimenez/Documents/GitHub/SwiftWgpuTools/Sources/Libs/Wgpu/wgpu-macos-aarch64-release/","/Users/albertpalaciosjimenez/Documents/GitHub/SwiftWgpuTools/Package.swift","/Users/albertpalaciosjimenez/Documents/GitHub/SwiftWgpuTools/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+
