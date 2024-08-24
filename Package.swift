@@ -16,7 +16,6 @@ var linkerSettings: [LinkerSetting] = []
 #if os(macOS)
 swiftSettings.append(.unsafeFlags(["-I" + wgpuPath]))
 linkerSettings.append(contentsOf: [
-    .unsafeFlags(["-L/opt/homebrew/lib"]),
     .unsafeFlags(["-L" + wgpuPath]),
     .unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", wgpuPath])
 ])
