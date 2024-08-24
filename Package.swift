@@ -8,7 +8,7 @@ let wgpuPath = "Sources/Libs/Wgpu/wgpu-linux-x86_64-release"
 let vulkanPath = "Sources/Libs/Vulkan/Linux"
 #endif
 
-var dependencies: [Target.Dependency] = ["Wgpu"]
+var dependencies: [Target.Dependency] = []
 var linkedLibraries: [LinkerSetting] = []
 
 var swiftSettings: [SwiftSetting] = []
