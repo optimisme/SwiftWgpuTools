@@ -55,7 +55,7 @@ let targets: [Target] = [
 #if os(Linux)
 let vulkanTarget = Target.systemLibrary(
     name: "Vulkan",
-    path: vulkanPath!,
+    path: vulkanPath,
     pkgConfig: "vulkan",
     providers: [
         .apt(["libvulkan-dev", "libvulkan1"])
