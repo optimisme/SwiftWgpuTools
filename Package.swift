@@ -50,14 +50,6 @@ targets.append(Target.systemLibrary(
         .apt(["libvulkan-dev", "libvulkan1"])
     ]
 ))
-targets.append(Target.systemLibrary(
-    name: "X11",
-    path: "Sources/Libs/X11/Linux",
-    pkgConfig: "x11",
-    providers: [
-        .apt(["libx11-dev"])
-    ]
-))
 #endif
 
 let package = Package(
