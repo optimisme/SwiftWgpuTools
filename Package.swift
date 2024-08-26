@@ -9,35 +9,25 @@ let vulkanPath = "Sources/Libs/Vulkan/Linux"
 #endif
 
 var dependencies: [Target.Dependency] = []
-var linkedLibraries: [LinkerSetting] = []
-var swiftSettings: [SwiftSetting] = []
-var linkerSettings: [LinkerSetting] = []
-
-#if os(macOS)
-swiftSettings.append(.unsafeFlags(["-I" + wgpuPath]))
-linkerSettings.append(contentsOf: [
-    .unsafeFlags(["-L" + wgpuPath]),
-    .unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", wgpuPath])
-])
+#if os(Linux)
+dependencies.append("Vulkan")
 #endif
 
+var linkedLibraries: [LinkerSetting] = []
 #if os(Linux)
-swiftSettings.append(.unsafeFlags(["-I/usr/include/vulkan"]))
-swiftSettings.append(.unsafeFlags(["-I" + wgpuPath]))
+linkedLibraries.append(.linkedLibrary("vulkan"))
+#endif
+
+var linkerSettings: [LinkerSetting] = []
+#if os(macOS)
 linkerSettings.append(contentsOf: [
-    .unsafeFlags(["-L/usr/lib"]),
-    .unsafeFlags(["-L/usr/lib/x86_64-linux-gnu"]),
     .unsafeFlags(["-L" + wgpuPath]),
     .unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", wgpuPath])
 ])
-dependencies.append("Vulkan")
-dependencies.append("X11")
-linkedLibraries.append(.linkedLibrary("vulkan"))
-linkedLibraries.append(.linkedLibrary("X11"))
 #endif
 
 // Define the targets array
-let targets: [Target] = [
+var targets: [Target] = [
     .target(
         name: "SwiftWgpuTools",
         path: wgpuPath,
@@ -51,27 +41,23 @@ let targets: [Target] = [
     )
 ]
 
-// Conditionally add Vulkan target for Linux
 #if os(Linux)
-let vulkanTarget = Target.systemLibrary(
+targets.append(Target.systemLibrary(
     name: "Vulkan",
     path: vulkanPath,
     pkgConfig: "vulkan",
     providers: [
         .apt(["libvulkan-dev", "libvulkan1"])
     ]
-)
-let x11Target = Target.systemLibrary(
+))
+targets.append(Target.systemLibrary(
     name: "X11",
     path: "Sources/Libs/X11/Linux",
     pkgConfig: "x11",
     providers: [
         .apt(["libx11-dev"])
     ]
-)
-let finalTargets = targets + [vulkanTarget, x11Target]
-#else
-let finalTargets = targets
+))
 #endif
 
 let package = Package(
@@ -83,5 +69,5 @@ let package = Package(
         )
     ],
     dependencies: [],
-    targets: finalTargets
+    targets: targets
 )
